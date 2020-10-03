@@ -14,7 +14,7 @@
 
         public IWinCondition GetWinRule()
         {
-            return new DealerAdvantageStrategy();
+            return new PlayerAdvantageStrategy();
         }
     }
 }
