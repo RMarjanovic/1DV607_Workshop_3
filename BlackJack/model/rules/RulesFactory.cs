@@ -11,5 +11,10 @@
         {
             return new AmericanNewGameStrategy();
         }
+
+        public IWinCondition GetWinRule()
+        {
+            return new DealerAdvantageStrategy();
+        }
     }
 }
