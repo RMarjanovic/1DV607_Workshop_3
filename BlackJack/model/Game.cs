@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BlackJack.model
 {
@@ -38,8 +35,7 @@ namespace BlackJack.model
 
         public bool Stand()
         {
-            // TODO: Implement this according to Game_Stand.sequencediagram
-            return true;
+            return m_dealer.Stand();
         }
 
         public IEnumerable<Card> GetDealerHand()
