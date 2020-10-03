@@ -1,4 +1,6 @@
-﻿namespace BlackJack.controller
+﻿using BlackJack.view;
+
+namespace BlackJack.controller
 {
     class PlayGame
     {
@@ -13,22 +15,21 @@
                 a_view.DisplayGameOver(a_game.IsDealerWinner());
             }
 
-            int input = a_view.GetInput();
+            Input input = a_view.GetInput();
 
-            if (input == 'p')
+            switch(input)
             {
-                a_game.NewGame();
+                case Input.Play:
+                    a_game.NewGame();
+                    break;
+                case Input.Hit:
+                    a_game.Hit();
+                    break;
+                case Input.Stand:
+                    a_game.Stand();
+                    break;
             }
-            else if (input == 'h')
-            {
-                a_game.Hit();
-            }
-            else if (input == 's')
-            {
-                a_game.Stand();
-            }
-
-            return input != 'q';
+            return input != Input.Quit;;
         }
     }
 }
