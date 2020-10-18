@@ -67,7 +67,18 @@ namespace BlackJack.model
         }
         public void Subscribe(IHitObserver a_subscriber)
         {
-            m_observers.Add(a_subscriber);
+            bool isAlreadyAdded = false;
+            m_observers.ForEach(observer => {
+                if(observer == a_subscriber)
+                {
+                    isAlreadyAdded = true;
+                }
+            });
+            if(!isAlreadyAdded)
+            {
+                m_observers.Add(a_subscriber);
+            }
+
         }
     }
 }

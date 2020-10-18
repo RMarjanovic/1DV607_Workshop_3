@@ -38,7 +38,7 @@ namespace BlackJack.controller
 
         public void DealtCard()
         {
-            Thread.Sleep(1000); //Wait for one second
+            Thread.Sleep(2000); //Wait for two seconds
             _a_view.DisplayWelcomeMessage();
 
             _a_view.DisplayDealerHand(_a_game.GetDealerHand(), _a_game.GetDealerScore());
