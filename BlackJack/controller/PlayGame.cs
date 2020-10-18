@@ -1,35 +1,45 @@
 ﻿using BlackJack.view;
+using BlackJack.model;
+using System.Threading;
 
 namespace BlackJack.controller
 {
     class PlayGame
     {
-        public bool Play(model.Game a_game, view.IView a_view)
+        private model.Game _a_game;
+        private view.IView _a_view;
+        public bool Play()
         {
-            a_view.DisplayWelcomeMessage();
-            a_view.DisplayDealerHand(a_game.GetDealerHand(), a_game.GetDealerScore());
-            a_view.DisplayPlayerHand(a_game.GetPlayerHand(), a_game.GetPlayerScore());
+            _a_view.DisplayWelcomeMessage();
+            _a_view.DisplayDealerHand(_a_game.GetDealerHand(), _a_game.GetDealerScore());
+            _a_view.DisplayPlayerHand(_a_game.GetPlayerHand(), _a_game.GetPlayerScore());
 
-            if (a_game.IsGameOver())
+            if (_a_game.IsGameOver())
             {
-                a_view.DisplayGameOver(a_game.IsDealerWinner());
+                _a_view.DisplayGameOver(_a_game.IsDealerWinner());
             }
 
-            Input input = a_view.GetInput();
+            Input input = _a_view.GetInput();
 
             switch(input)
             {
                 case Input.Play:
-                    a_game.NewGame();
+                    _a_game.NewGame();
                     break;
                 case Input.Hit:
-                    a_game.Hit();
+                    _a_game.Hit();
                     break;
                 case Input.Stand:
-                    a_game.Stand();
+                    _a_game.Stand();
                     break;
             }
             return input != Input.Quit;;
+        }
+
+        public PlayGame(model.Game a_game, view.IView a_view)
+        {
+            _a_game = a_game;
+            _a_view = a_view;
         }
     }
 }
