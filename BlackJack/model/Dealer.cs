@@ -1,4 +1,6 @@
-﻿namespace BlackJack.model
+﻿using System.Collections.Generic;
+
+namespace BlackJack.model
 {
     class Dealer : Player
     {

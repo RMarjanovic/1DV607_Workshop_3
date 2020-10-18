@@ -4,15 +4,15 @@ using System.Threading;
 
 namespace BlackJack.controller
 {
-    class PlayGame
+    class PlayGame: IHitObserver
     {
         private model.Game _a_game;
         private view.IView _a_view;
         public bool Play()
         {
-            _a_view.DisplayWelcomeMessage();
-            _a_view.DisplayDealerHand(_a_game.GetDealerHand(), _a_game.GetDealerScore());
-            _a_view.DisplayPlayerHand(_a_game.GetPlayerHand(), _a_game.GetPlayerScore());
+            _a_game.Subscribe(this);
+
+            DealtCard();
 
             if (_a_game.IsGameOver())
             {
@@ -34,6 +34,15 @@ namespace BlackJack.controller
                     break;
             }
             return input != Input.Quit;;
+        }
+
+        public void DealtCard()
+        {
+            Thread.Sleep(1000); //Wait for one second
+            _a_view.DisplayWelcomeMessage();
+
+            _a_view.DisplayDealerHand(_a_game.GetDealerHand(), _a_game.GetDealerScore());
+            _a_view.DisplayPlayerHand(_a_game.GetPlayerHand(), _a_game.GetPlayerScore());
         }
 
         public PlayGame(model.Game a_game, view.IView a_view)
