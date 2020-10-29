@@ -6,31 +6,31 @@ namespace BlackJack.controller
 {
     class PlayGame: IHitObserver
     {
-        private model.Game _a_game;
-        private view.IView _a_view;
+        private model.Game m_game;
+        private view.IView m_view;
         public bool Play()
         {
-            _a_game.Subscribe(this);
+            m_game.Subscribe(this);
 
             DealtCard();
 
-            if (_a_game.IsGameOver())
+            if (m_game.IsGameOver())
             {
-                _a_view.DisplayGameOver(_a_game.IsDealerWinner());
+                m_view.DisplayGameOver(m_game.IsDealerWinner());
             }
 
-            Input input = _a_view.GetInput();
+            Input input = m_view.GetInput();
 
             switch(input)
             {
                 case Input.Play:
-                    _a_game.NewGame();
+                    m_game.NewGame();
                     break;
                 case Input.Hit:
-                    _a_game.Hit();
+                    m_game.Hit();
                     break;
                 case Input.Stand:
-                    _a_game.Stand();
+                    m_game.Stand();
                     break;
             }
             return input != Input.Quit;;
@@ -39,16 +39,16 @@ namespace BlackJack.controller
         public void DealtCard()
         {
             Thread.Sleep(2000); //Wait for two seconds
-            _a_view.DisplayWelcomeMessage();
+            m_view.DisplayWelcomeMessage();
 
-            _a_view.DisplayDealerHand(_a_game.GetDealerHand(), _a_game.GetDealerScore());
-            _a_view.DisplayPlayerHand(_a_game.GetPlayerHand(), _a_game.GetPlayerScore());
+            m_view.DisplayDealerHand(m_game.GetDealerHand(), m_game.GetDealerScore());
+            m_view.DisplayPlayerHand(m_game.GetPlayerHand(), m_game.GetPlayerScore());
         }
 
         public PlayGame(model.Game a_game, view.IView a_view)
         {
-            _a_game = a_game;
-            _a_view = a_view;
+            m_game = a_game;
+            m_view = a_view;
         }
     }
 }
