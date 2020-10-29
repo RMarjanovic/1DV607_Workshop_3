@@ -61,6 +61,7 @@ namespace BlackJack.model
         public void Subscribe(IHitObserver a_subscriber)
         {
             m_dealer.Subscribe(a_subscriber);
+            m_player.Subscribe(a_subscriber);
         }
     }
 }
